@@ -1,0 +1,32 @@
+package veiculos;
+
+public abstract class Veiculo {
+	
+	protected String placa;
+	protected String modelo;
+	protected boolean alugado;
+	
+	public Veiculo(String placa,String modelo, boolean alugado) {
+		this.placa = placa;
+		this.modelo = modelo;
+		this.alugado = false;
+	}
+	public double calcularValorLocacao(int dias){
+		double valor = 0;
+		
+		return valor;
+	}
+	
+	@Override
+	public String toString() {
+		return "Veiculo: "+ modelo + " - " + placa +" ";
+	}
+	public boolean isAlugado() {
+		return alugado;
+	}
+	public void setAlugado(boolean alugado) {
+		this.alugado = alugado;
+	}
+	
+
+}
