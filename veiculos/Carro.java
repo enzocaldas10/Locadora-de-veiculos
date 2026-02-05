@@ -6,12 +6,12 @@ public class Carro extends Veiculo{
 		super(placa, modelo, alugado);
 		
 	}
-	public double calcularValorLocacao(int dias){
+	public void calcularValorLocacao(int dias){
 		double valor = 0;
 		
 		valor = 400 * dias;
 		
-		return valor;
+		System.out.println("O Custo da locacação foi: " + valor + "R$");
 	}
 
 }

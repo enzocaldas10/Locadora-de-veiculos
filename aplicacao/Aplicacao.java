@@ -6,7 +6,6 @@ import java.util.List;
 
 import aluguel.Cliente;
 import aluguel.Locacao;
-import aluguel.Locavel;
 import veiculos.Caminhao;
 import veiculos.Carro;
 import veiculos.Moto;
@@ -21,12 +20,12 @@ public class Aplicacao {
 		
 		int opt = 0;
 		
-		Caminhao t1 = new Caminhao("Accelo", "DRI9252", false);
+		Caminhao t1 = new Caminhao("Accelo", "TFN7232", false);
 		Caminhao t2 = new Caminhao("Axor", "DRI9252", false);
 		Carro c1 = new Carro("Siena", "BTR4376", false);
 		Carro c2 = new Carro("Mobi", "DSY8509", false);
 		Moto m1 = new Moto("Bis", "RGB8765", false);
-		Moto m2 = new Moto("CG", "RGB8765", false);
+		Moto m2 = new Moto("CG", "HYF8233", false);
 		
 		frota.add(t1);
 		frota.add(t2);
@@ -35,13 +34,14 @@ public class Aplicacao {
 		frota.add(m1);
 		frota.add(m2);
 		
-		while(opt != 4){
+		while(opt != 5){
 			
 			System.out.println("Selecione uma das opções:");
 			System.out.println("1. Iniciar locação");
 			System.out.println("2. Finalizar locação");
 			System.out.println("3. Listar locações");
-			System.out.println("4. Finalizar Programa");
+			System.out.println("4. Listar Veículos Disponíveis");
+			System.out.println("5. Fechar Programa");
 			
 			opt = sc.nextInt();
 			
@@ -63,12 +63,15 @@ public class Aplicacao {
 					Locacao.iniciarLocacao(frota, locacoes, cliente, diaLocacao, sc);
 					break;
 				case 2:
-					Locacao.finalizarLocacao( locacoes, sc);
+					Locacao.finalizarLocacao( locacoes, frota, sc);
 					break;
 				case 3:
-					listarlocacoes(locacoes);
+					listarLocacoes(locacoes);
 					break;
 				case 4:
+					listarFrota(frota);
+					break;
+				case 5:
 					System.out.println("Fim do programa!");
 					break;
 				default:
@@ -79,7 +82,20 @@ public class Aplicacao {
 		}
 	}
 
-	private static void listarlocacoes(List<Locacao> locacoes) {
+	private static void listarFrota(List<Veiculo> frota) {
+		
+		System.out.println("Veículos disponíveis:");
+	
+		int i = 0;
+		for(Veiculo n : frota) {
+			if (	!n.isAlugado()){
+			System.out.println((i+1) + "° " + n.toString());
+			}
+			i++;
+		}
+	}
+
+	private static void listarLocacoes(List<Locacao> locacoes) {
 		
 		System.out.println("Locações ativas: ");
 		int i = 0;

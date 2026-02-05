@@ -2,6 +2,7 @@ package veiculos;
 
 public abstract class Veiculo {
 	
+	protected int tipo;
 	protected String placa;
 	protected String modelo;
 	protected boolean alugado;
@@ -11,10 +12,10 @@ public abstract class Veiculo {
 		this.modelo = modelo;
 		this.alugado = false;
 	}
-	public double calcularValorLocacao(int dias){
+	public void calcularValorLocacao(int dias){
 		double valor = 0;
 		
-		return valor;
+		System.out.println(valor); 
 	}
 	
 	@Override
@@ -27,6 +28,5 @@ public abstract class Veiculo {
 	public void setAlugado(boolean alugado) {
 		this.alugado = alugado;
 	}
-	
 
 }

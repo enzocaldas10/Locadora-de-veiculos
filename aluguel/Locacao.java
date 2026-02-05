@@ -11,6 +11,7 @@ public class Locacao implements Locavel{
 	private Cliente cliente;
 	private int diaLocacao;
 	
+	
 	public Locacao(Veiculo veiculo, Cliente cliente, int diaLocacao) {
 		super();
 		this.veiculo = veiculo;
@@ -18,10 +19,9 @@ public class Locacao implements Locavel{
 		this.diaLocacao = diaLocacao;
 	}
 	
-	
 	@Override
 	public String toString() {
-		return "Locacao [veiculo=" + veiculo + ", cliente=" + cliente + ", diaLocacao=" + diaLocacao + "]";
+		return "Dados da Locação : Veículo = " + veiculo + ", Cliente = " + cliente + ", Dia da locação = " + diaLocacao + ".";
 	}
 
 
@@ -52,8 +52,8 @@ public class Locacao implements Locavel{
 	
 	}
 
-	public static void finalizarLocacao(List<Locacao> locacoes, Scanner sc) {
-			
+	public static void finalizarLocacao(List<Locacao> locacoes, List<Veiculo> frota, Scanner sc) {
+		
 		System.out.println("Selecione por número uma locação para finalizar:");
 		
 		for (int i = 0; i < locacoes.size(); i++) {
@@ -62,14 +62,58 @@ public class Locacao implements Locavel{
 		
 		int select = sc.nextInt() - 1;
 		
+		System.out.println("Digite o dia de devolução:");
+		
+		int diaDevolucao = sc.nextInt();
+		int diasTotais = 0;
+		
 		if((select >= 0) && (select < locacoes.size())) {
 			
 			for(int j = 0 ; j < locacoes.size() ; j++) {
 				if(select == j) {
+					
+					diasTotais = diaDevolucao - locacoes.get(j).getDiaLocacao();
+					locacoes.get(j).getVeiculo().calcularValorLocacao(diasTotais);
+					
+					for(Veiculo n : frota) {
+						if(n == locacoes.get(j).getVeiculo()) {
+							n.setAlugado(false);
+						}
+					}
 					locacoes.remove(j);
 				}
 			}
 		}
+		
 	}
-}
 
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	public int getDiaLocacao() {
+		return diaLocacao;
+	}
+
+
+	public void setDiaLocacao(int diaLocacao) {
+		this.diaLocacao = diaLocacao;
+	}
+
+}

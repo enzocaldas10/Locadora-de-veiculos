@@ -11,4 +11,10 @@ public class Cliente {
 		this.cpf = cpf;
 		this.idade = idade;
 	}
+	
+	public String toString() {
+		return  nome + " - " + cpf;
+		
+	}
+	
 }
