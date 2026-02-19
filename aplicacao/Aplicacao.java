@@ -1,6 +1,7 @@
 package aplicacao;
 
 import java.util.Scanner;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,13 +51,18 @@ public class Aplicacao {
 					sc.nextLine();
 					
 					System.out.println("Digite o nome completo do cliente:");
-					String nomeCliente = sc.nextLine();
+					String nomeCliente = sc.next();
+					sc.nextLine();
 					System.out.println("Digite a idade do cliente:");
 					int idadeCliente = sc.nextInt();
 					System.out.println("Digite o cpf do cliente:");
 					String cpfCliente = sc.next();
-					System.out.println("Digite o dia de locação do carro:");
-					int diaLocacao = sc.nextInt();
+					sc.nextLine();
+					System.out.println("Digite a data de Locação: yyyy-mm-dd");
+					String data = sc.next();
+					sc.nextLine();
+					LocalDate diaLocacao = LocalDate.parse(data);
+					System.out.println("Data de Locação definida: " + diaLocacao);
 					
 					Cliente cliente = new Cliente(nomeCliente, cpfCliente, idadeCliente);
 					

@@ -12,7 +12,7 @@ public abstract class Veiculo {
 		this.modelo = modelo;
 		this.alugado = false;
 	}
-	public void calcularValorLocacao(int dias){
+	public void calcularValorLocacao(long dias){
 		double valor = 0;
 		
 		System.out.println(valor); 
@@ -20,7 +20,7 @@ public abstract class Veiculo {
 	
 	@Override
 	public String toString() {
-		return "Veiculo: "+ modelo + " - " + placa +" ";
+		return modelo + " - " + placa +" ";
 	}
 	public boolean isAlugado() {
 		return alugado;

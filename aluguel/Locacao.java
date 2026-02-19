@@ -2,17 +2,18 @@ package aluguel;
 
 import java.util.List;
 import java.util.Scanner;
-
+import java.time.Duration;
+import java.time.LocalDate;
 import veiculos.Veiculo;
 
 public class Locacao implements Locavel{
 	
 	private Veiculo veiculo;
 	private Cliente cliente;
-	private int diaLocacao;
+	private LocalDate diaLocacao;
 	
 	
-	public Locacao(Veiculo veiculo, Cliente cliente, int diaLocacao) {
+	public Locacao(Veiculo veiculo, Cliente cliente, LocalDate diaLocacao) {
 		super();
 		this.veiculo = veiculo;
 		this.cliente = cliente;
@@ -25,7 +26,7 @@ public class Locacao implements Locavel{
 	}
 
 
-	public static void iniciarLocacao(List<Veiculo> frota, List<Locacao> locacoes, Cliente cliente, int diaLocacao, Scanner sc) {
+	public static void iniciarLocacao(List<Veiculo> frota, List<Locacao> locacoes, Cliente cliente, LocalDate diaLocacao, Scanner sc) {
 		
 		System.out.println("Selecione um veículo:");
 		
@@ -62,18 +63,21 @@ public class Locacao implements Locavel{
 		
 		int select = sc.nextInt() - 1;
 		
-		System.out.println("Digite o dia de devolução:");
+		System.out.println("Digite a data de devolução: yyyy-mm-dd");
 		
-		int diaDevolucao = sc.nextInt();
-		int diasTotais = 0;
+		String devolucao = sc.next();
+		sc.nextLine();
+		LocalDate diaDevolucao = LocalDate.parse(devolucao);
+		Duration duracaoEmp = null;
+		
 		
 		if((select >= 0) && (select < locacoes.size())) {
 			
 			for(int j = 0 ; j < locacoes.size() ; j++) {
 				if(select == j) {
 					
-					diasTotais = diaDevolucao - locacoes.get(j).getDiaLocacao();
-					locacoes.get(j).getVeiculo().calcularValorLocacao(diasTotais);
+					duracaoEmp = Duration.between(locacoes.get(j).getDiaLocacao().atStartOfDay(),diaDevolucao.atStartOfDay());
+					locacoes.get(j).getVeiculo().calcularValorLocacao(duracaoEmp.toDays());
 					
 					for(Veiculo n : frota) {
 						if(n == locacoes.get(j).getVeiculo()) {
@@ -107,12 +111,12 @@ public class Locacao implements Locavel{
 	}
 
 
-	public int getDiaLocacao() {
+	public LocalDate getDiaLocacao() {
 		return diaLocacao;
 	}
 
 
-	public void setDiaLocacao(int diaLocacao) {
+	public void setDiaLocacao(LocalDate diaLocacao) {
 		this.diaLocacao = diaLocacao;
 	}
 

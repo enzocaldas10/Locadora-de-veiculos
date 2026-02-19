@@ -6,7 +6,7 @@ public class Moto extends Veiculo{
 		super(placa, modelo, alugado);
 		
 	}
-	public void calcularValorLocacao(int dias){
+	public void calcularValorLocacao(long dias){
 		double valor = 0;
 		
 		valor = 200 * dias;

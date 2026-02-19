@@ -6,7 +6,7 @@ public class Caminhao extends Veiculo{
 		super(placa, modelo, alugado);
 		
 	}
-	public void calcularValorLocacao(int dias){
+	public void calcularValorLocacao(long dias){
 		double valor = 0;
 		
 		valor = 800 * dias;
